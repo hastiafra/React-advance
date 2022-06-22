@@ -92,21 +92,57 @@ test("change input value and clicking on add btn", () => {
   waitFor(() => expect(counterEl.textContent).toBe("5"));
 });
 
-
-
 test("change input value and clicking on the subtract btn", () => {
-    const { getByTestId } = render(<Counter />);
-    const subtractBtnEl = getByTestId("subtract-btn");
-    const counterEl = getByTestId("counter");
-    const inputEl = getByTestId("input");
-  
-    fireEvent.change(inputEl, {
-      terget: {
-        value: "5",
-      },
-    });
-  
-    fireEvent.click(subtractBtnEl);
-  
-    waitFor(() => expect(counterEl.textContent).toBe("5"));
+  const { getByTestId } = render(<Counter />);
+  const subtractBtnEl = getByTestId("subtract-btn");
+  const counterEl = getByTestId("counter");
+  const inputEl = getByTestId("input");
+
+  fireEvent.change(inputEl, {
+    terget: {
+      value: "5",
+    },
   });
+
+  fireEvent.click(subtractBtnEl);
+
+  waitFor(() => expect(counterEl.textContent).toBe("5"));
+});
+
+test("counter contains correct class name", () => {
+  const { getByTestId } = render(<Counter />);
+  const subtractBtnEl = getByTestId("subtract-btn");
+  const counterEl = getByTestId("counter");
+  const addBtnEl = getByTestId("add-btn");
+
+  const inputEl = getByTestId("input");
+
+  expect(counterEl.className).toBe("");
+
+  fireEvent.change(inputEl, {
+    terget: {
+      value: "50",
+    },
+  });
+
+  fireEvent.click(addBtnEl);
+
+  waitFor(() => expect(counterEl.className).toBe("green"));
+
+  fireEvent.click(addBtnEl);
+
+  waitFor(() => expect(counterEl.className).toBe("green"));
+
+    fireEvent.click(subtractBtnEl);
+    fireEvent.click(subtractBtnEl);
+
+   waitFor(() => expect(counterEl.className).toBe(""));
+
+    fireEvent.click(subtractBtnEl);
+    fireEvent.click(subtractBtnEl);
+
+    fireEvent.click(subtractBtnEl);
+    fireEvent.click(subtractBtnEl);
+
+    waitFor(() => expect(counterEl.className).toBe("red"));
+});

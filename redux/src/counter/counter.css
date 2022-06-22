@@ -18,3 +18,11 @@ button{
 button:hover{
     cursor:pointer;
 }
+
+.green{
+  color:green;
+}
+
+.red{
+  color:red;
+}
